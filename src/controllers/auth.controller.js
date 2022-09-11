@@ -20,15 +20,17 @@ router.post("/signup", async (req, res, next) => {
   res.json({ auth: true, token: token });
 });
 
-router.get("/me", (req, res, next) => {
+router.get("/me", async (req, res, next) => {
   const token = req.headers["x-access-token"];
   if (!token) {
     return res.status(401).json({ auth: false, message: "No token provided." });
   }
   const decoded = jwt.verify(token, config.secret);
-  console.log(decoded);
-
-  res.json({ message: "Me" });
+  const user = await User.findById(decoded.id, { password: 0 });
+  if (!user) {
+    return res.status(404).send("No user found.");
+  }
+  res.json(user);
 });
 
 router.post("/signin", (req, res, next) => {
