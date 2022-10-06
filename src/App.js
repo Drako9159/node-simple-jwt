@@ -7,7 +7,8 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(require("./auth.controller"));
 //TODO Static Files
-app.use(express.static(path.join(__dirname, "public")));
+
+app.use(express.static(path.join(__dirname, "/public")));
 
 // 404 handler
 app.use((req, res, next) => {
