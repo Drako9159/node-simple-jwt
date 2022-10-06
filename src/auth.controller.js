@@ -1,9 +1,13 @@
 const { Router } = require("express");
-const User = require("../models/User");
+const User = require("./models/User");
 const router = Router();
 const jwt = require("jsonwebtoken");
-const config = require("../config");
-const verifyToken = require("./verifyToken");
+const config = require("./config");
+const verifyToken = require("./controllers/verifyToken");
+
+router.get("/login", (req, res) => {
+  res.render("login");
+});
 
 router.post("/signup", async (req, res, next) => {
   const { username, email, password } = req.body;
