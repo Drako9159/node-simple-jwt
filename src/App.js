@@ -5,10 +5,15 @@ const path = require("path");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use(require("./auth.controller"));
 //TODO Static Files
+//app.set("views", path.join(__dirname + "/views"));
 
-app.use(express.static(path.join(__dirname, "/public")));
+//app.set("views engine", "ejs");
+
+app.use(express.static(path.join(__dirname, "views")));
+//app.use(express.static(__dirname + "/public"));
+// routes
+app.use(require("./routes/auth.routes"));
 
 // 404 handler
 app.use((req, res, next) => {
