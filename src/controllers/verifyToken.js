@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 const config = require("../config");
-
 function verifyToken(req, res, next) {
   if (!req.headers.cookie) {
     return res.status(403).send({ auth: false, message: "No token provided." });
